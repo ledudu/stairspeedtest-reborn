@@ -80,14 +80,14 @@ gcc $(find src/ -name "ss_local-*.o") $(find . -name "*.a" ! -name "*.dll.a") "$
 mv ssr-local.exe ../built/
 cd ..
 
-if [ ! -d trojan/ ]; then git clone https://github.com/trojan-gfw/trojan --depth=1; fi
-cd trojan
-git pull --ff-only
-cmake -DMYSQL_INCLUDE_DIR="$MINGW_PREFIX/include/mysql" -G "Unix Makefiles" .
-make -j4
-g++ -o trojan $(find CMakeFiles/trojan.dir/src/ -name "*.obj") -static -lmysqlclient -lssl -lcrypto -lz -lws2_32 -lwsock32 -lboost_program_options-mt -lcrypt32  -lsecur32 -lshlwapi -s
-mv trojan.exe ../built/
-cd ..
+#if [ ! -d trojan/ ]; then git clone https://github.com/trojan-gfw/trojan --depth=1; fi
+#cd trojan
+#git pull --ff-only
+#cmake -DMYSQL_INCLUDE_DIR="$MINGW_PREFIX/include/mysql" -G "Unix Makefiles" .
+#make -j4
+#g++ -o trojan $(find CMakeFiles/trojan.dir/src/ -name "*.obj") -static -lmysqlclient -lssl -lcrypto -lz -lws2_32 -lwsock32 -lboost_program_options-mt -lcrypt32  -lsecur32 -lshlwapi -s
+#mv trojan.exe ../built/
+#cd ..
 
 if [[ "$MSYSTEM" = "MINGW64" ]];then
     curl -LO https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-windows-64.zip
