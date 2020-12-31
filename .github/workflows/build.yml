@@ -23,3 +23,27 @@ jobs:
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/FETCH_HEAD') }} # key from git repos
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
+    - name: Cache built clients
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-clients-64
+      with:
+        path: ~/clients
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/FETCH_HEAD') }} # key from git repos
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+    - name: Build dependencies and clients
+      run: |
+        bash scripts/build.windows.maindeps.sh
+        bash scripts/build.windows.clients.sh
+    - name: Build main program
+      run: |
+        bash scripts/build.windows.release.sh
+        mv $USERPROFILE/clients/built/websocketd.exe base/tools/gui/
+        mv $USERPROFILE/clients/built base/tools/clients
+        mv base stairspeedtest
+    - name: Upload
+      uses: actions/upload-artifact@v1
+      with:
+        name: stairspeedtest_reborn_win64
+        path: stairspeedtest/
