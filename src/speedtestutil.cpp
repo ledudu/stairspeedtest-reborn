@@ -2001,6 +2001,7 @@ int explodeConfContent(const std::string &content, const std::string &custom_por
 
 void explode(const std::string &link, bool sslibev, bool ssrlibev, const std::string &custom_port, nodeInfo &node)
 {
+	node.proxyUrl = link;
     // TODO: replace strFind with startsWith if appropriate
     if(strFind(link, "ssr://"))
         explodeSSR(link, sslibev, ssrlibev, custom_port, node);
