@@ -2,17 +2,6 @@ name: GitHub CI
 on: [push]
 
 jobs:
-  macos_build:
-    name: macOS Build
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: |
-        bash scripts/build.macos.release.sh
-        bash scripts/build.macos.clients.sh
-        mv base stairspeedtest
-        
   windows64_build:
     name: Windows x86_64 Build
     runs-on: windows-latest
@@ -34,22 +23,3 @@ jobs:
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/FETCH_HEAD') }} # key from git repos
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
-    - name: Cache built clients
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-clients-64
-      with:
-        path: ~/clients
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/FETCH_HEAD') }} # key from git repos
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-    - name: Build dependencies and clients
-      run: |
-        bash scripts/build.windows.maindeps.sh
-        bash scripts/build.windows.clients.sh
-    - name: Build main program
-      run: |
-        bash scripts/build.windows.release.sh
-        mv $USERPROFILE/clients/built/websocketd.exe base/tools/gui/
-        mv $USERPROFILE/clients/built base/tools/clients
-        mv base stairspeedtest
