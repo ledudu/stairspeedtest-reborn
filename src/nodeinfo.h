@@ -21,6 +21,7 @@ struct nodeInfo
     unsigned long long rawSpeed[20] = {};
     unsigned long long totalRecvBytes = 0;
     int duration = 0;
+	double avgTestSpeed = 0.0;
     std::string avgSpeed = "N/A";
     std::string maxSpeed = "N/A";
     std::string ulSpeed = "N/A";

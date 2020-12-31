@@ -399,6 +399,7 @@ int perform_test(nodeInfo &node, std::string localaddr, int localport, std::stri
     auto duration = duration_cast<milliseconds>(end - start);
     int deltatime = duration.count() + 1;//add 1 to prevent some error
     node.totalRecvBytes = cur_recv_bytes;
+	node.avgTestSpeed = cur_recv_bytes * 1000.0 / deltatime / 1048576.0;
     node.avgSpeed = speedCalc(cur_recv_bytes * 1000.0 / deltatime);
     node.maxSpeed = speedCalc(max_speed);
     if(node.avgSpeed == "0.00B")

@@ -593,8 +593,8 @@ void saveFilterNodeResult(std::vector<nodeInfo>& nodes)
 
 	for (nodeInfo& x : nodes)
 	{
-		//if (x.avgSpeed > 5)
-		//{
+		if (x.avgTestSpeed >= 5)
+		{
 			ini.SetCurrentSection(x.group + "^" + x.remarks);
 			ini.Set("NodeUrl", x.proxyStr);
 			ini.Set("AvgPing", x.avgPing);
@@ -610,10 +610,10 @@ void saveFilterNodeResult(std::vector<nodeInfo>& nodes)
 			ini.SetArray("RawPing", ",", x.rawPing);
 			ini.SetArray("RawSitePing", ",", x.rawSitePing);
 			ini.SetArray("RawSpeed", ",", x.rawSpeed);
-		//}
+		}
 	}
 
-	ini.ToFile(saveFilterNodeResult);
+	ini.ToFile(filterNodePath);
 }
 
 std::string removeEmoji(const std::string &orig_remark)
