@@ -563,6 +563,7 @@ void saveResult(std::vector<nodeInfo> &nodes)
     for(nodeInfo &x : nodes)
     {
         ini.SetCurrentSection(x.group + "^" + x.remarks);
+		ini.Set("NodeUrl", x.proxyStr);
         ini.Set("AvgPing", x.avgPing);
         ini.Set("PkLoss", x.pkLoss);
         ini.Set("SitePing", x.sitePing);

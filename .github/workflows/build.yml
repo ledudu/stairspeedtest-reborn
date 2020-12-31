@@ -35,7 +35,7 @@ jobs:
     - name: Build dependencies and clients
       run: |
         bash scripts/build.windows.maindeps.sh
-        bash scripts/build.windows.clients.sh
+        # bash scripts/build.windows.clients.sh
     - name: Build main program
       run: |
         bash scripts/build.windows.release.sh
