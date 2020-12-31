@@ -39,8 +39,8 @@ jobs:
     - name: Build main program
       run: |
         bash scripts/build.windows.release.sh
-        mv $USERPROFILE/clients/built/websocketd.exe base/tools/gui/
-        mv $USERPROFILE/clients/built base/tools/clients
+        # mv $USERPROFILE/clients/built/websocketd.exe base/tools/gui/
+        # mv $USERPROFILE/clients/built base/tools/clients
         mv base stairspeedtest
     - name: Upload
       uses: actions/upload-artifact@v1

@@ -20,7 +20,7 @@ typedef std::lock_guard<std::mutex> guarded_mutex;
 std::mutex logger_mutex;
 
 std::string curtime, result_content;
-std::string resultPath, logPath;
+std::string resultPath, logPath, filterNodePath;
 
 int makeDir(const char *path)
 {
@@ -73,6 +73,7 @@ void resultInit()
 {
     curtime = getTime(1);
     resultPath = "results" PATH_SLASH + curtime + ".log";
+	filterNodePath = "filterNode" PATH_SLASH + curtime + ".log";
 }
 
 void writeLog(int type, std::string content, int level)

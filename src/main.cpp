@@ -582,6 +582,40 @@ void saveResult(std::vector<nodeInfo> &nodes)
     ini.ToFile(resultPath);
 }
 
+void saveFilterNodeResult(std::vector<nodeInfo>& nodes)
+{
+	INIReader ini;
+	std::string data;
+
+	ini.SetCurrentSection("Basic");
+	ini.Set("Tester", "Stair Speedtest Reborn " VERSION);
+	ini.Set("GenerationTime", getTime(3));
+
+	for (nodeInfo& x : nodes)
+	{
+		//if (x.avgSpeed > 5)
+		//{
+			ini.SetCurrentSection(x.group + "^" + x.remarks);
+			ini.Set("NodeUrl", x.proxyStr);
+			ini.Set("AvgPing", x.avgPing);
+			ini.Set("PkLoss", x.pkLoss);
+			ini.Set("SitePing", x.sitePing);
+			ini.Set("AvgSpeed", x.avgSpeed);
+			ini.Set("MaxSpeed", x.maxSpeed);
+			ini.Set("ULSpeed", x.ulSpeed);
+			ini.SetNumber<unsigned long long>("UsedTraffic", x.totalRecvBytes);
+			ini.SetNumber<int>("GroupID", x.groupID);
+			ini.SetNumber<int>("ID", x.id);
+			ini.SetBool("Online", x.online);
+			ini.SetArray("RawPing", ",", x.rawPing);
+			ini.SetArray("RawSitePing", ",", x.rawSitePing);
+			ini.SetArray("RawSpeed", ",", x.rawSpeed);
+		//}
+	}
+
+	ini.ToFile(saveFilterNodeResult);
+}
+
 std::string removeEmoji(const std::string &orig_remark)
 {
     char emoji_id[2] = {(char)-16, (char)-97};
@@ -787,6 +821,7 @@ void batchTest(std::vector<nodeInfo> &nodes)
         //resultEOF(speedCalc(tottraffic * 1.0), onlines, nodes->size());
         writeLog(LOG_TYPE_INFO, "All nodes tested. Total/Online nodes: " + std::to_string(node_count) + "/" + std::to_string(onlines) + " Traffic used: " + speedCalc(tottraffic * 1.0));
         //exportHTML();
+		saveFilterNodeResult(nodes);
         saveResult(nodes);
         if(webserver_mode || !multilink)
         {
