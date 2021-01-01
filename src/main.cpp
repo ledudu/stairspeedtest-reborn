@@ -597,7 +597,8 @@ void saveFilterNodeResult(std::vector<nodeInfo>& nodes)
 		//{
 			ini.SetCurrentSection(x.group + "^" + x.remarks);
 			ini.Set("NodeUrl", x.proxyUrl);
-			ini.SetNumber<double>("avgTestSpeed", x.avgTestSpeed);
+			//ini.SetNumber<double>("avgTestSpeed", x.avgTestSpeed);
+			/*
 			ini.Set("AvgPing", x.avgPing);
 			ini.Set("PkLoss", x.pkLoss);
 			ini.Set("SitePing", x.sitePing);
@@ -611,6 +612,7 @@ void saveFilterNodeResult(std::vector<nodeInfo>& nodes)
 			ini.SetArray("RawPing", ",", x.rawPing);
 			ini.SetArray("RawSitePing", ",", x.rawSitePing);
 			ini.SetArray("RawSpeed", ",", x.rawSpeed);
+			*/
 		//}
 	}
 
