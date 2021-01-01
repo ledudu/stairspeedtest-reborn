@@ -31,7 +31,7 @@ enum
     LOG_LEVEL_VERBOSE
 };
 
-extern std::string resultPath, logPath, filterNodePath;
+extern std::string resultPath, logPath, filterNodePath, filterNodeBase64Path;
 
 int makeDir(const char *path);
 std::string getTime(int type);

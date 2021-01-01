@@ -64,6 +64,7 @@ std::string speedtest_mode = "all";
 std::string override_conf_port = "";
 std::string export_color_style = "rainbow";
 int def_thread_count = 4;
+int def_avg_Speed = 5;
 bool export_with_maxspeed = false;
 bool export_as_new_style = true;
 bool test_site_ping = true;
@@ -419,6 +420,7 @@ void readConf(std::string path)
 #endif // _WIN32
     ini.GetIfExist("override_conf_port", override_conf_port);
     ini.GetIntIfExist("thread_count", def_thread_count);
+	ini.GetIntIfExist("avg_Speed", def_avg_Speed);
 
     ini.EnterSection("export");
     ini.GetBoolIfExist("export_with_maxspeed", export_with_maxspeed);
@@ -593,9 +595,10 @@ void saveFilterNodeResult(std::vector<nodeInfo>& nodes)
 
 	for (nodeInfo& x : nodes)
 	{
-		data += x.proxyUrl;
-		//if (x.avgTestSpeed >= 5)
-		//{
+		
+		if (x.avgTestSpeed >= def_avg_Speed)
+		{
+			data += x.proxyUrl + "\n";
 			ini.SetCurrentSection(x.group + "^" + x.remarks);
 			ini.Set("NodeUrl", x.proxyUrl);
 			ini.SetNumber<double>("avgTestSpeed", x.avgTestSpeed);
@@ -614,10 +617,13 @@ void saveFilterNodeResult(std::vector<nodeInfo>& nodes)
 			ini.SetArray("RawSitePing", ",", x.rawSitePing);
 			ini.SetArray("RawSpeed", ",", x.rawSpeed);
 			*/
-		//}
+		}
 	}
-	ini.Set("AllNodeUrl", data);
+	//ini.Set("AllNodeUrl", data);
 	ini.ToFile(filterNodePath);
+
+	//filterNodeBase64Path
+	fileWrite(filterNodeBase64Path, data, true);
 }
 
 std::string removeEmoji(const std::string &orig_remark)
