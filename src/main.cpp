@@ -593,11 +593,11 @@ void saveFilterNodeResult(std::vector<nodeInfo>& nodes)
 
 	for (nodeInfo& x : nodes)
 	{
-		//if (x.avgTestSpeed >= 5)
-		//{
+		if (x.avgTestSpeed >= 5)
+		{
 			ini.SetCurrentSection(x.group + "^" + x.remarks);
 			ini.Set("NodeUrl", x.proxyUrl);
-			//ini.SetNumber<double>("avgTestSpeed", x.avgTestSpeed);
+			ini.SetNumber<double>("avgTestSpeed", x.avgTestSpeed);
 			/*
 			ini.Set("AvgPing", x.avgPing);
 			ini.Set("PkLoss", x.pkLoss);
@@ -613,7 +613,7 @@ void saveFilterNodeResult(std::vector<nodeInfo>& nodes)
 			ini.SetArray("RawSitePing", ",", x.rawSitePing);
 			ini.SetArray("RawSpeed", ",", x.rawSpeed);
 			*/
-		//}
+		}
 	}
 
 	ini.ToFile(filterNodePath);
@@ -1046,6 +1046,7 @@ int main(int argc, char* argv[])
 
     makeDir("logs");
     makeDir("results");
+	makeDir("filterNode");
     logInit(rpcmode);
     readConf("pref.ini");
 #ifdef _WIN32
