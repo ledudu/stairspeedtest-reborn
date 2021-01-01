@@ -566,6 +566,7 @@ void saveResult(std::vector<nodeInfo> &nodes)
     {
         ini.SetCurrentSection(x.group + "^" + x.remarks);
 		ini.Set("NodeUrl", x.proxyUrl);
+		ini.SetNumber<double>("avgTestSpeed", x.avgTestSpeed);
         ini.Set("AvgPing", x.avgPing);
         ini.Set("PkLoss", x.pkLoss);
         ini.Set("SitePing", x.sitePing);
@@ -599,9 +600,9 @@ void saveFilterNodeResult(std::vector<nodeInfo>& nodes)
 		if (x.avgTestSpeed >= def_avg_Speed)
 		{
 			data += x.proxyUrl + "\n";
-			ini.SetCurrentSection(x.group + "^" + x.remarks);
-			ini.Set("NodeUrl", x.proxyUrl);
-			ini.SetNumber<double>("avgTestSpeed", x.avgTestSpeed);
+			//ini.SetCurrentSection(x.group + "^" + x.remarks);
+			//ini.Set("NodeUrl", x.proxyUrl);
+			//ini.SetNumber<double>("avgTestSpeed", x.avgTestSpeed);
 			/*
 			ini.Set("AvgPing", x.avgPing);
 			ini.Set("PkLoss", x.pkLoss);
@@ -620,7 +621,7 @@ void saveFilterNodeResult(std::vector<nodeInfo>& nodes)
 		}
 	}
 	//ini.Set("AllNodeUrl", data);
-	ini.ToFile(filterNodePath);
+	//ini.ToFile(filterNodePath);
 
 	//filterNodeBase64Path
 	fileWrite(filterNodeBase64Path, data, true);
