@@ -74,7 +74,7 @@ void resultInit()
     curtime = getTime(1);
     resultPath = "results" PATH_SLASH + curtime + ".log";
 	filterNodePath = "filterNode" PATH_SLASH + curtime + ".log";
-	filterNodeBase64Path = "filterNode" PATH_SLASH + "filter.txt";
+	filterNodeBase64Path = "filterNode" PATH_SLASH "filter.txt";
 }
 
 void writeLog(int type, std::string content, int level)
