@@ -565,13 +565,13 @@ void saveResult(std::vector<nodeInfo> &nodes)
     for(nodeInfo &x : nodes)
     {
         ini.SetCurrentSection(x.group + "^" + x.remarks);
-		ini.Set("NodeUrl", x.proxyUrl);
-		ini.SetNumber<double>("avgTestSpeed", x.avgTestSpeed);
+		ini.SetNumber<double>("AvgTestSpeed", x.avgTestSpeed);
         ini.Set("AvgPing", x.avgPing);
         ini.Set("PkLoss", x.pkLoss);
         ini.Set("SitePing", x.sitePing);
         ini.Set("AvgSpeed", x.avgSpeed);
         ini.Set("MaxSpeed", x.maxSpeed);
+		ini.Set("NodeUrl", x.proxyUrl);
         ini.Set("ULSpeed", x.ulSpeed);
         ini.SetNumber<unsigned long long>("UsedTraffic", x.totalRecvBytes);
         ini.SetNumber<int>("GroupID", x.groupID);
