@@ -625,6 +625,7 @@ void saveFilterNodeResult(std::vector<nodeInfo>& nodes)
 
 	//filterNodeBase64Path
 	fileWrite(filterNodeBase64Path, data, true);
+	fileWrite("filterNode" PATH_SLASH"node.txt", base64_encode(data), true);
 }
 
 std::string removeEmoji(const std::string &orig_remark)
